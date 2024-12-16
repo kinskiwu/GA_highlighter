@@ -11,8 +11,9 @@ const highlightGrokPosts = () => {
       !post.dataset.grokProcessed &&
       !post.querySelector('[aria-label="Play"]')
     ) {
-      post.dataset.grokProcessed = 'true';
-      post.style.border = '3px solid #FFD700';
+      post.dataset.grokProcessed = "true";
+      post.style.border = "3px solid #FFD700";
+      post.style.borderRadius = "8px";
     }
   }
 };
@@ -40,17 +41,15 @@ const startObserver = () => {
 
 const clearHighlights = () => {
   // Remove highlights and processing marks
-  document
-    .querySelectorAll('[data-testid="cellInnerDiv"]')
-    .forEach((post) => {
-      post.style.border = '';
-      delete post.dataset.grokProcessed; // Clear processed state
-    });
+  document.querySelectorAll('[data-testid="cellInnerDiv"]').forEach((post) => {
+    post.style.border = "";
+    delete post.dataset.grokProcessed; // Clear processed state
+  });
 };
 
 // Listen for messages from popup
 chrome.runtime.onMessage.addListener((message) => {
-  if (message.action === 'toggleHighlight') {
+  if (message.action === "toggleHighlight") {
     if (message.isEnabled) {
       clearHighlights();
       startObserver();
@@ -65,7 +64,7 @@ chrome.runtime.onMessage.addListener((message) => {
 });
 
 // Check initial state
-chrome.storage.local.get('isEnabled', ({ isEnabled = false }) => {
+chrome.storage.local.get("isEnabled", ({ isEnabled = false }) => {
   if (isEnabled) {
     startObserver();
   }
@@ -74,5 +73,5 @@ chrome.storage.local.get('isEnabled', ({ isEnabled = false }) => {
 module.exports = {
   highlightGrokPosts,
   startObserver,
-  clearHighlights
+  clearHighlights,
 };
