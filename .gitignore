@@ -1,0 +1,27 @@
+# macOS system files
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Chrome Extension development
+*.crx
+*.pem
+*.zip
+
+# Build output
+dist/
+build/
+
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# IDE files
+.idea/
+.vscode/
+*.swp
+*.swo
