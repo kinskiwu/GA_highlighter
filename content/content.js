@@ -24,7 +24,7 @@ const startObserver = () => {
     for (const mutation of mutations) {
       if (mutation.addedNodes.length) {
         highlightGrokPosts();
-        return; // Exit after first match
+        return;
       }
     }
   });
@@ -52,7 +52,7 @@ const clearHighlights = () => {
 chrome.runtime.onMessage.addListener((message) => {
   if (message.action === 'toggleHighlight') {
     if (message.isEnabled) {
-      clearHighlights(); // Clear before re-enabling
+      clearHighlights();
       startObserver();
     } else {
       if (observer) {
@@ -70,3 +70,9 @@ chrome.storage.local.get('isEnabled', ({ isEnabled = false }) => {
     startObserver();
   }
 });
+
+module.exports = {
+  highlightGrokPosts,
+  startObserver,
+  clearHighlights
+};
